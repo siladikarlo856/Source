@@ -32,12 +32,14 @@ void drawStartScreen(void);
   */
 int main(void)
 {
-   int i;
 	/* L3GD20 Struct */
 	L3GD20_t L3GD20_Data;
 	/* Ball Struct	*/
 	Ball ball;
 
+	/* SysTick initalization*/
+	systickInit(MS_FREQUENCY);
+	
 	/* LCD initialization */
   LCD_Init();
   /* Example how to use functions to write on LCD */
@@ -58,8 +60,8 @@ int main(void)
 		L3GD20_Read(&L3GD20_Data);
 		BALL_Update(L3GD20_Data, &ball);
 		
-		//delay
-		for(i = 0; i < 300000; i++);
+		/* Delay */
+		delay_ms(40);
   }
 }
 

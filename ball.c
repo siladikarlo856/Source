@@ -38,10 +38,8 @@ void BALL_Display(Ball ball)
   */
 void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball)
 {
-	
-  LCD_SetTextColor(LCD_COLOR_WHITE);
-	BALL_Display(*ball);
-	LCD_SetTextColor(BALL_COLOR);
+	// Variable for motion check 
+	Ball oldBall = *ball;
 	
 	// Sensor and LCD are in inverse orientation
 	ball->Vx += L3GD20_Data.Y * SENSOR_DENSITY;
@@ -66,8 +64,15 @@ void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball)
 		ball->X = BOTTOM_BOUNDARY-BALL_RADIUS-1;
 		ball->Vx *= WALL_BOUNCE;
 	}
-	/* Display ball on LCD */
-	BALL_Display(*ball);
+	
+	if(oldBall.X != ball->X || oldBall.Y != ball->Y) {
+		/* Update ball on LCD */
+		LCD_SetTextColor(LCD_COLOR_WHITE);
+		BALL_Display(oldBall);
+		LCD_SetTextColor(BALL_COLOR);
+		BALL_Display(*ball);
+	}
+	
 }
 
 /******************************END OF FILE*****************************************/
