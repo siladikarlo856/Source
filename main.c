@@ -20,7 +20,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern volatile uint32_t TIM1_Countdown;
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
@@ -92,7 +91,7 @@ void drawStartScreen(void)
 		LCD_SetLayer(LCD_FOREGROUND_LAYER);
 	
 	/* Stop counter */
-	TIM1_Countdown = STOP;
+	TIM_Cmd(TIM1, DISABLE);
 		
 	if (IOE_Config() == IOE_OK)
 	{   
@@ -123,6 +122,7 @@ void drawStartScreen(void)
 		
 		/*Reset and start counter*/
 		TIM_ResetCountdown(TIM1);
+		TIM_Cmd(TIM1, ENABLE);
   }  
   else
   {

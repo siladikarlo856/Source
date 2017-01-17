@@ -22,6 +22,7 @@
 void TIM_Init(TIM_TypeDef* TIMx, uint16_t prescaler, uint16_t period);
 void TIM_DefaultInit(TIM_TypeDef* TIMx);
 void TIM_ResolutionInit(TIM_TypeDef* TIMx, uint32_t resolution);
+void TIM_Disable(TIM_TypeDef* TIMx);
 void TIM_AttachUserInterruptFunction(TIM_TypeDef* TIMx, void (*TIM_UserInterruptFunctionPtr)(void));
 void TIM_DetachUserInterruptFunction(TIM_TypeDef* TIMx);
 uint32_t TIM_GetMicros(TIM_TypeDef* TIMx);

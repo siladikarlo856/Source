@@ -211,6 +211,17 @@ void TIM_Init(TIM_TypeDef* TIMx, uint16_t TIM_Prescaler, uint16_t TIM_Period){
 }
 
 /**
+	* @brief Disables timer.
+	*
+	* @param TIMx: timer to disable.
+	*
+	* @retval None.
+	*/
+void TIM_Disable(TIM_TypeDef* TIMx){
+	TIM_Cmd(TIMx, DISABLE);
+}
+
+/**
   * @brief Initializes chosen timer with default parameters (timer resolution is set to 1 ms).
 	*
 	* @param TIMx: where x can be 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 to select whitch timer to initialize.

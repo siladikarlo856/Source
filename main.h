@@ -31,7 +31,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-#define NO_ACTIVITY_TIME 10000000
+#define NO_ACTIVITY_TIME 5000000
 
 #define STOP		1
 #define START		S
