@@ -26,9 +26,15 @@
 #include "ball.h"
 #include "systick.h"
 #include "touch.h"
+#include "timers.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+
+#define NO_ACTIVITY_TIME 5000000
+
+#define STOP		1
+#define START		S
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

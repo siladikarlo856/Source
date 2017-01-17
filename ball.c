@@ -31,6 +31,7 @@
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
+void BALL_MoveBall(Ball *ball);
 
 /**
   * @brief   Main program
@@ -53,9 +54,11 @@ void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball)
 	ball->Vx += L3GD20_Data.Y * SENSOR_DENSITY;
 	ball->Vy += L3GD20_Data.X * SENSOR_DENSITY;
 
+	/*Move ball*/
 	ball->X += (ball->Vx);
 	ball->Y += (ball->Vy);
 
+	/* check boundaries */
 	if(ball->Y >= RIGHT_BOUNDARY-BALL_RADIUS-1){
 		ball->Y = RIGHT_BOUNDARY-BALL_RADIUS-2;
 		ball->Vy *= WALL_BOUNCE;
@@ -73,15 +76,28 @@ void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball)
 		ball->Vx *= WALL_BOUNCE;
 	}
 	
+	/* Check if ball moves */
 	if(oldBall.X != ball->X || oldBall.Y != ball->Y) {
-
+		/* Ball is moving. Reset NO_ACTIVITY_TIMER */
+		TIM_ResetCountdown(TIM1);
 		
+		/* Refresh ball only if it moves */
 		LCD_SetTextColor(LCD_COLOR_WHITE);
 		BALL_Display(oldBall);
 		LCD_SetTextColor(BALL_COLOR);
 		BALL_Display(*ball);
 	}
 	
+}
+
+/**
+  * @brief  Refresh x and y coordinate 
+	* @param  Ball*: pointer to ball
+  * @retval None
+  */
+void BALL_MoveBall(Ball *ball)
+{
+
 }
 
 /******************************END OF FILE*****************************************/
