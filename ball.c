@@ -18,6 +18,14 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+
+/**
+  * @brief  Macro that calculate absolute value of x
+  * @param  Integer x
+  * @retval Absolute value of x
+  */
+#define abs(x)  ( ( (x) < 0) ? -(x) : (x) )
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -49,24 +57,25 @@ void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball)
 	ball->Y += (ball->Vy);
 
 	if(ball->Y >= RIGHT_BOUNDARY-BALL_RADIUS-1){
-		ball->Y = RIGHT_BOUNDARY-BALL_RADIUS-1;
+		ball->Y = RIGHT_BOUNDARY-BALL_RADIUS-2;
 		ball->Vy *= WALL_BOUNCE;
 	}
 	if(ball->Y <= LEFT_BOUNDARY+BALL_RADIUS+1){
-		ball->Y = LEFT_BOUNDARY+BALL_RADIUS+1;
+		ball->Y = LEFT_BOUNDARY+BALL_RADIUS+2;
 		ball->Vy *= WALL_BOUNCE;
 	}
 	if(ball->X <= TOP_BOUNDARY+BALL_RADIUS+1){
-		ball->X = TOP_BOUNDARY+BALL_RADIUS+1;
+		ball->X = TOP_BOUNDARY+BALL_RADIUS+2;
 		ball->Vx *= WALL_BOUNCE;
 	}
 	if(ball->X >= BOTTOM_BOUNDARY-BALL_RADIUS-1){
-		ball->X = BOTTOM_BOUNDARY-BALL_RADIUS-1;
+		ball->X = BOTTOM_BOUNDARY-BALL_RADIUS-2;
 		ball->Vx *= WALL_BOUNCE;
 	}
 	
 	if(oldBall.X != ball->X || oldBall.Y != ball->Y) {
-		/* Update ball on LCD */
+
+		
 		LCD_SetTextColor(LCD_COLOR_WHITE);
 		BALL_Display(oldBall);
 		LCD_SetTextColor(BALL_COLOR);

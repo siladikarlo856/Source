@@ -25,6 +25,7 @@
 #include "lcd.h"
 #include "ball.h"
 #include "systick.h"
+#include "touch.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

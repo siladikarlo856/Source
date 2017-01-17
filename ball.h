@@ -18,6 +18,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stm32f4xx.h>
+#include <stdlib.h>
 #include "lcd.h"
 #include "mems.h"
 
@@ -29,7 +30,7 @@
 
 #define BALL_RADIUS				20
 #define BALL_COLOR		LCD_COLOR_GREEN
-#define WALL_BOUNCE			 -0.3
+#define WALL_BOUNCE			 -0.5
 #define SENSOR_DENSITY		0.05
 /* Exported types ------------------------------------------------------------*/
 typedef struct 
