@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include "lcd.h"
 #include "mems.h"
+#include "timers.h"
 
 /* Defines ------------------------------------------------------------------*/
 #define LEFT_BOUNDARY 		10
@@ -47,6 +48,7 @@ typedef struct
 /* Exported functions ------------------------------------------------------- */
 void BALL_Display(Ball ball);
 void BALL_Update(L3GD20_t L3GD20_Data, Ball* ball);
+
 
 #endif /* __BALL_H */
 

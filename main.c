@@ -20,6 +20,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern volatile uint32_t TIM1_Countdown;
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
@@ -43,6 +44,10 @@ int main(void)
 	/* SysTick initalization*/
 	systickInit(MS_FREQUENCY);
 	
+	/*Timer - COunter intialization*/
+	TIM_SetCoundtownTop(TIM1, NO_ACTIVITY_TIME);
+	TIM_DefaultInit(TIM1);
+	
 	/* LCD initialization */
   LCD_Init();
   /* Example how to use functions to write on LCD */
@@ -59,12 +64,19 @@ int main(void)
 	/* Infinite loop */
   while (1)
   {
+		/*If there is no activity reset game*/
+		if(TIM_GetCountdownFlagStatus(TIM1) == 1){
+			drawStartScreen();
+			BALL_Display(ball);
+		}
+		
 		/* Read data */
 		L3GD20_Read(&L3GD20_Data);
+		/* Update ball position */
 		BALL_Update(L3GD20_Data, &ball);
 		
 		/* Delay */
-		delay_ms(50);
+		delay_ms(60);
   }
 }
 
@@ -79,6 +91,9 @@ void drawStartScreen(void)
 		/* Set LCD foreground layer */
 		LCD_SetLayer(LCD_FOREGROUND_LAYER);
 	
+	/* Stop counter */
+	TIM1_Countdown = STOP;
+		
 	if (IOE_Config() == IOE_OK)
 	{   
 		/* Clear LCD and set background color */
@@ -105,6 +120,9 @@ void drawStartScreen(void)
 		LCD_SetFont(&Font12x12);
 		/* Set LCD text color */
 		LCD_SetTextColor(BALL_COLOR); 
+		
+		/*Reset and start counter*/
+		TIM_ResetCountdown(TIM1);
   }  
   else
   {
